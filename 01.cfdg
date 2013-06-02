@@ -1,0 +1,33 @@
+CF::Background = [b -1]
+CF::Symmetry = CF::Dihedral, 3, 0, 0, 45
+
+startshape Picture
+
+shape Picture {
+  loop 360 [
+    r 1
+  ] {
+    Branch [
+      sat 1
+      b 0.8
+      hue rand(360)
+    ]
+  }
+}
+
+shape Branch {
+  loop 15 [
+    r 0±35
+    x 4
+  ] {
+    BranchSegment()[s 0.7]
+  } finally {
+    CIRCLE [s 0.2]
+  }
+}
+
+path BranchSegment {
+  LINETO(4, 0)
+  STROKE()[]
+}
+
