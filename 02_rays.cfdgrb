@@ -1,0 +1,55 @@
+CF::Background = [b -1]
+
+startshape Scene
+
+shape Scene {
+  Background [a 0 b 1 sat -1 hue 0]
+  Nerves [a 1 b 1 sat 1]
+}
+ 
+shape Nerves {
+  loop 8 [
+    r 45
+  ] {
+    loop 15 [
+      r 2
+    ] {
+      loop cSeg = 40 [
+        r 0±(log10(cSeg ^ %{Nerves_Curly} + 1))
+        x 0.99
+        a -0.05
+      ] {
+        NerveSegment(cSeg * 3 - %{NerveSegment_ColorOffset}, log10(cSeg + 1) / 16 + 0.1)[]
+      }
+    }
+  }
+}
+ 
+path NerveSegment(number color, number width) {
+  LINETO(1,0)
+  STROKE(width)[hue color]
+}
+
+shape Background {
+  loop 96 [
+    r 3.75
+  ] {
+    loop 40 [
+      // r 0±0.7
+      x 1
+      a -0.09
+    ] {
+      BackgroundSegment()[]
+    } finally {
+      TRIANGLE [s 2 r -90 y -0.35 x 0.6]
+    }
+  }
+}
+ 
+path BackgroundSegment {
+  LINETO(1,0)
+  LINETO(1,2)
+  LINETO(0,2)
+  CLOSEPOLY()
+  FILL()[]
+}
