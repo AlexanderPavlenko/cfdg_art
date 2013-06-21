@@ -1,0 +1,2 @@
+80.times{|i| `cfdg -s 800 01.cfdg /tmp/#{'%02i' % i}.png`}
+avconv -r 10 -i /tmp/%03d.png -vcodec libx264 -pix_fmt yuv420p -crf 0 -t 10 /tmp/mandala.avi

@@ -1,0 +1,78 @@
+CF::Background = [b -1]
+CF::Symmetry = CF::Dihedral, 3, 0, 0, 45
+
+startshape Picture
+
+shape Picture {
+  loop 360 [
+    r 1
+  ] {
+    Branch [
+      sat 1
+      b 0.8
+      hue rand(360)
+    ]
+  }
+  Frame [s 12]
+}
+
+shape Branch {
+  loop 15 [
+    r 0±35
+    x 4
+  ] {
+    BranchSegment()[s 0.7]
+  } finally {
+    CIRCLE [s 0.2]
+  }
+}
+
+path BranchSegment {
+  LINETO(4, 0)
+  STROKE()[]
+}
+
+
+shape Frame {
+  loop 360 [
+    r 1
+    hue 1
+  ] {
+    ColoredSegment [
+      x 5
+      sat 1
+      b 0.3
+      a -0.7
+      s rand(0.5…2)
+    ]
+    Nerves [x 5 s 0.15 a -1]
+  }
+}
+ 
+shape ColoredSegment
+rule 65% {
+  CIRCLE()[]
+}
+rule {
+  CIRCLE()[hue rand(360)]
+}
+ 
+shape Nerves {
+  loop 5
+  [
+    r 72
+  ] {
+    loop 10 [
+      r 0±50
+      x 1
+      a 0.08
+    ] {
+      NerveSegment[]
+    }
+  }
+}
+ 
+path NerveSegment {
+  LINETO(1,0)
+  STROKE()[]
+}
