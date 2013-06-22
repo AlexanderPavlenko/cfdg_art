@@ -1,0 +1,23 @@
+CF::Background = [b 1]
+
+startshape BloodyDance
+
+shape BloodyDance {
+  CIRCLE()[s 5]
+  loop cDrop = 400 [] {
+    Drop_T = %{Drop_T}
+    Drop_Size = log(cDrop + 1)
+    Drop [
+      x (rand(40) + cos(Drop_T + cDrop * rand(0.5, 3)) * Drop_Size * rand(0.5, 3))
+      y (rand(40) + sin(Drop_T + cDrop * rand(0.5, 3)) * Drop_Size * rand(0.5, 3))
+      s Drop_Size
+      hue rand(10)
+      sat 1
+    ]
+  }
+}
+
+shape Drop {
+  CIRCLE()[s 1.05 b 0]
+  CIRCLE()[b 0.6]
+}

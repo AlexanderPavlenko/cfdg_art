@@ -1,6 +1,6 @@
 class Template
 
-  CFDG_PARAMS = ['-q', '-', "/tmp/%03<inc>i.png"]
+  CFDG_PARAMS = ['-', "/tmp/%03<inc>i.png"]
 
   attr_accessor :file,
                 :template,
