@@ -16,7 +16,7 @@ class Template
     end
   end
 
-  def render(template_params, cfdg_params)
+  def render(template_params=nil, cfdg_params=CFDG_PARAMS)
     ensure_template
     if @dry_run
       puts template_params.inspect
@@ -24,7 +24,7 @@ class Template
       params = ['cfdg'] + cfdg_params
       params[-1] = params[-1] % {:inc => @autoincrement_counter} if @autoincrement
       IO.popen(params, 'r+') do |io|
-        io.puts @template % template_params
+        io.puts unfold_template(template_params)
         io.close_write
         io.read
       end
@@ -44,6 +44,14 @@ class Template
       @template = @file.read
     else
       raise TypeError.new('No template found')
+    end
+  end
+
+  def unfold_template(params)
+    if params
+      @template % params
+    else
+      @template
     end
   end
 end

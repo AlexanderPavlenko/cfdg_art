@@ -3,11 +3,11 @@ require './template.rb'
 @test = false
 @one = false
 
-template = Template.new(:file => './02_rays.cfdgrb')
+template = Template.new(:file => './02_filaments.cfdgrb')
 template.dry_run = true if @test
 enumerators = {}
 enumerators[:Nerves_Curly] =
-  (0..Math::PI).step(0.01).lazy.map{|x| Math.sin(x) * 18 + 2 }
+  (0..Math::PI).step(0.0131).lazy.map{|x| Math.sin(x) * 18 + 2 }
 enumerators[:NerveSegment_ColorOffset] =
   (0..360).step(360.0 / enumerators[:Nerves_Curly].size)
 
